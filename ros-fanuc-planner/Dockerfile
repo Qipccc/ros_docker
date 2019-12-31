@@ -9,8 +9,7 @@ RUN apt-get update && apt-get install -y \
     ros-${ROS_DISTRO}-moveit \
     --no-install-recommends \
     # Clear apt-cache to reduce image size
-    && rm -rf /var/lib/apt/lists/* \
-    && apt install ros-kinetic-fanuc-m10ia-support
+    && rm -rf /var/lib/apt/lists/* 
 
 ENV CATKIN_WS=/root/catkin_ws
 RUN mkdir -p $CATKIN_WS/src
@@ -25,3 +24,4 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
     && cd $CATKIN_WS \
     && rosdep install -y --from-paths . --ignore-src --rosdistro ${ROS_DISTRO} \
     # Build catkin workspace
+    && catkin_make
